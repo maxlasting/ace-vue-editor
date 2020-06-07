@@ -11,7 +11,7 @@
       <div class="others" slot="header-after">其它功能...</div>
       <div slot="footer"></div>
     </component>
-    <div class="loading">
+    <div class="loading" v-else="ready">
       <div class="outer__line">
         <div class="inner"></div>
       </div>

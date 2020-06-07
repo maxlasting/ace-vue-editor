@@ -2,7 +2,7 @@
 
 ![npm](https://img.shields.io/npm/v/ace-vue-editor) ![](https://img.shields.io/npm/l/ace-vue-editor) ![GitHub repo size](https://img.shields.io/github/repo-size/maxlasting/ace-vue-editor)
 
-The markdown editro for vue， like [juejin.im](https://juejin.im)
+The markdown editro for vue, like [juejin.im](https://juejin.im).
 
 ## Install
 
@@ -112,3 +112,7 @@ body, html {
 }
 </style>
 ```
+
+## others
+
+If you have good suggestions, please leave a message on my GitHub.

@@ -1,0 +1,75 @@
+const webpack = require('webpack')
+
+const webpackDevServer = require('webpack-dev-server')
+
+const chalk = require('chalk')
+
+const dirname = process.cwd()
+
+const { join } = require('path')
+
+const build = function (config) {
+  webpack(config, function (err, stats) {
+    if (err) throw err
+    process.stdout.write(
+      stats.toString(
+        { colors: true, modules: false, children: false, chunks: false, chunkModules: false }
+      ) + '\n\n'
+    )
+    if (stats.hasErrors()) {
+      console.log(chalk.red('  打包遇到错误:.\n'))
+      process.exit(1)
+    }
+    console.log(chalk.cyan('  打包完成.\n'))
+    process.exit(0)
+  })
+}
+
+if (process.env.NODE_ENV === 'production') {
+  const config = require('./build/webpack.build.config.js')
+
+  build(config)
+}
+
+if (process.env.NODE_ENV === 'example') {
+  const config = require('./build/webpack.example.config.js')
+
+  build(config)
+}
+
+
+if (process.env.NODE_ENV === 'script') {
+  const config = require('./build/webpack.build.config.js')
+
+  build(config)
+}
+
+if (process.env.NODE_ENV === 'development') {
+  const devConfigPromise = require('./build/webpack.dev.config.js')
+
+  devConfigPromise().then(({devConfig, port}) => {
+    const compiler = webpack(devConfig)
+
+    const server = new webpackDevServer(compiler, {
+      contentBase: __dirname,
+      hot: true,
+      clientLogLevel: 'none',
+      overlay: {
+        warnings: true,
+        errors: true,
+      },
+      disableHostCheck: true,
+      quiet: true,
+      progress: false,
+      historyApiFallback: {
+        index: devConfig.output.publicPath + 'index.html'
+      },
+      stats: {
+        colors: true
+      },
+    })
+
+    server.listen(port, '0.0.0.0')
+
+  }).catch(err => console.log(err))
+}

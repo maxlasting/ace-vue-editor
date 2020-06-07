@@ -10,8 +10,9 @@
     "build": "npm run build:dist && npm run build:example"
   },
   "files": [
-    "dist/*",
     "README.md",
+    "LICENSE",
+    "dist/*",
     "package.json"
   ],
   "author": "付强",
@@ -20,7 +21,7 @@
     "markdown",
     "ace"
   ],
-  "license": "ISC",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/Maxlasting/ace-vue-editor"

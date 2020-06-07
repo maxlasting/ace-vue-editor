@@ -1,12 +1,10 @@
 # ace-vue-editor
 
-** Current in test version **
+![npm](https://img.shields.io/npm/v/ace-vue-editor) ![](https://img.shields.io/npm/l/ace-vue-editor) ![GitHub repo size](https://img.shields.io/github/repo-size/maxlasting/ace-vue-editor)
 
-Now only use in Vue
+The markdown editro for vue， like [juejin.im](https://juejin.im)
 
----
-
-## install
+## Install
 
 ```
 npm i -S ace-vue-editor
@@ -16,9 +14,11 @@ npm i -S ace-vue-editor
 
 ![May312020 212706.gif](http://ttc-tal.oss-cn-beijing.aliyuncs.com/1590931668/May-31-2020%2021-27-06.gif)
 
-## demo
+## Live demo
 
-[Live demo](https://maxlasting.github.io/demo/ace-vue-markdown/index)
+[demo](https://maxlasting.github.io/demo/ace-vue-markdown/index)
+
+## Usage
 
 ```vue
 <template>

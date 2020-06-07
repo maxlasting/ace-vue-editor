@@ -11,8 +11,11 @@
       <div class="others" slot="header-after">其它功能...</div>
       <div slot="footer"></div>
     </component>
-    <div v-else class="loading">
-      加载中...
+    <div class="loading">
+      <div class="outer__line">
+        <div class="inner"></div>
+      </div>
+      <span>资源加载中, 请耐心等待 ...</span>
     </div>
   </div>
 </template>
@@ -68,10 +71,34 @@ body, html {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 80px;
-  height: 20px;
+  width: 100%;
+  height: 100%;
   margin-bottom: 30px;
   color: #686868;
+  z-index: 10;
+  background: rgba($color: #ffffff, $alpha: 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  .outer__line {
+    width: 45%;
+    margin-bottom: 16px;
+    height: 8px;
+    border: 1px solid #dddddd;
+    position: relative;
+    .inner {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 30%;
+      background: #eeeeee;
+      height: 100%;
+      animation: loading 3s linear infinite;
+    }
+  }
 }
 
 .editor .submit, .editor .insert, .editor .others {
@@ -86,5 +113,17 @@ body, html {
 
 .editor .submit {
   margin: 0 16px;
+}
+
+@keyframes loading {
+  0% {
+    left: 0;
+  }
+  50% {
+    left: 70%
+  }
+  100% {
+    left: 0;
+  }
 }
 </style>

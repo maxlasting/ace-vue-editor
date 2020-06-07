@@ -11,11 +11,7 @@
       >
       <div class="header__fns">
         <slot name="header-before"></slot>
-        <div class="header__fns-submit">
-          <div class="submit__btn" @click="clickToSubmitFn">
-            <span class="submit__btn-text">发布</span>
-          </div>
-        </div>
+        <slot name="submit"></slot>
         <slot name="header-after"></slot>
       </div>
     </div>
@@ -302,13 +298,13 @@ export default {
         })
       }
     },
-    clickToSubmitFn () {
+    $submit () {
       const preview = this.$refs.preview
       const firstp = preview.querySelector('p')
       const description = firstp ? firstp.innerHTML.replace(/<[^>]+>/g, '') + '...' : ''
-      this.$emit('submit', {
+      return  {
         source: this.source, html: this.html, title: this.articleTitle, description,
-      })
+      }
     },
     clickTotogglePreviewFn () {
       this.togglePreview = !this.togglePreview

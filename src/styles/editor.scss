@@ -49,27 +49,6 @@ $b: "__ace_markdown_editor__";
     color: #686868;
     font-size: 14px;
   }
-
-  .header__fns .header__fns-submit {
-    margin-left: 32px;
-  }
-
-  .header__fns .header__fns-submit .submit__btn {
-    cursor: pointer;
-    border: 1px solid #dddddd;
-    padding: 4px 16px;
-    border-radius: 4px;
-    user-select: none;
-
-    &:hover {
-      color: #1BA2F0;
-      border-color: #1BA2F0;
-    }
-
-    &:active {
-      box-shadow: 0px 0px 12px rgba($color: #dddddd, $alpha: 0.7);
-    }
-  }
 }
 
 .#{$b} .editor__body {

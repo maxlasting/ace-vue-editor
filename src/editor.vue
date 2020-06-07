@@ -10,12 +10,13 @@
         :class="{ 'toggle': !togglePreview }"
       >
       <div class="header__fns">
-        <slot name="header"></slot>
+        <slot name="header-before"></slot>
         <div class="header__fns-submit">
           <div class="submit__btn" @click="clickToSubmitFn">
             <span class="submit__btn-text">发布</span>
           </div>
         </div>
+        <slot name="header-after"></slot>
       </div>
     </div>
 

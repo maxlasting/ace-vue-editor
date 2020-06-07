@@ -8,7 +8,7 @@
         <a class="insert" @click="insertImageFn">插入图片</a>
       </div>
       <div class="submit" slot="submit" @click="submitFn">提交</div>
-      <div class="after" slot="before-after">其它功能</div>
+      <div class="others" slot="header-after">其它功能...</div>
       <div slot="footer"></div>
     </component>
     <div v-else class="loading">
@@ -74,7 +74,7 @@ body, html {
   color: #686868;
 }
 
-.editor .submit, .editor .insert {
+.editor .submit, .editor .insert, .editor .others {
   cursor: pointer;
   border: 1px solid #e8e8e8;
   padding: 6px 12px;

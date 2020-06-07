@@ -1,6 +1,6 @@
 {
   "name": "ace-vue-editor",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "ace vue markdown editor",
   "main": "dist/index.js",
   "scripts": {
@@ -15,7 +15,17 @@
     "package.json"
   ],
   "author": "付强",
+  "keywords": [
+    "vue",
+    "markdown",
+    "ace"
+  ],
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Maxlasting/ace-vue-editor"
+  },
+  "homepage": "https://github.com/Maxlasting/ace-vue-editor#readme",
   "devDependencies": {
     "@babel/core": "^7.8.4",
     "@babel/plugin-proposal-class-properties": "^7.8.3",

@@ -140,7 +140,7 @@ $b: "__ace_markdown_editor__";
 
   .editor__body-html {
     height: 100%;
-    width: 50%;
+    flex: 1;
     overflow: hidden;
     background-color: #ffffff;
   }
@@ -171,7 +171,6 @@ $b: "__ace_markdown_editor__";
 
 .#{$b} .editor__footer {
   .editor__footer-left {
-    // box-sizing: border-box;
     border-right: 1px solid #dddddd;
     background-color: #f8f9fa;
     width: 50%;
@@ -230,7 +229,7 @@ $b: "__ace_markdown_editor__";
   }
 
   .editor__footer-right {
-    width: 50%;
+    flex: 1;
     height: 100%;
     display: flex;
     align-items: center;

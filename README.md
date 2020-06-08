@@ -12,7 +12,7 @@ npm i -S ace-vue-editor
 
 ## view
 
-![May312020 212706.gif](http://ttc-tal.oss-cn-beijing.aliyuncs.com/1590931668/May-31-2020%2021-27-06.gif)
+![](https://cdn.maxlasting.com/images/7dvJyR.png)
 
 ## Live demo
 

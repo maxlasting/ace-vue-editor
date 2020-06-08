@@ -4,7 +4,7 @@
     <ul class="list">
       <li class="list__item">
         <span>添加标题</span>
-        <span>Command + H</span>
+        <span>Ctrl / Command + H</span>
       </li>
       <li class="list__item">
         <span>插入图片</span>
@@ -36,19 +36,19 @@
       </li>
       <li class="list__item">
         <span>文字加粗</span>
-        <span>Command + B</span>
+        <span>Ctrl / Command + B</span>
       </li>
       <li class="list__item">
         <span>文字倾斜</span>
-        <span>Shift + Command + I</span>
+        <span>Shift + Ctrl / Command + I</span>
       </li>
       <li class="list__item">
         <span>文字划线</span>
-        <span>Shift + Command + S</span>
+        <span>Shift + Ctrl / Command + S</span>
       </li>
       <li class="list__item">
         <span>段落引用</span>
-        <span>Command + .</span>
+        <span>Ctrl / Command + .</span>
       </li>
     </ul>
   </div>

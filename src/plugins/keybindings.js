@@ -23,6 +23,7 @@ export const keybindings = {
   'insertLink': createKeyBinding([Command, 'K']),
   'insertTable': createKeyBinding([Command, Alt, 'T']),
   'insertCode': createKeyBinding([Command, Shift,  'C']),
+  'insertInlineCode': createKeyBinding([Command, Alt,  'C']),
   'editorSave': createKeyBinding([Command, 'S'])
 }
 
@@ -234,6 +235,22 @@ export const bindingMethods = {
     this.editor.insert(code)
     const { row, column } = selection.getSelectionAnchor()
     this._moveCursor(row - 2, column + 3)
+  },
+  /* Ctrl/Cmd-Alt-C */
+  insertInlineCode () {
+    const code = '``'
+    const selection = this.editor.getSelection()
+    if (!selection.isEmpty()) {
+      const range = selection.getRange()
+      this.editSession.replace(range, code)
+      const { row, column } = selection.getSelectionAnchor()
+      selection.clearSelection()
+      this._moveCursor(row, column - 1)
+      return
+    }
+    this.editor.insert(code)
+    const { row, column } = selection.getSelectionAnchor()
+    this._moveCursor(row, column - 1)
   },
   /* Ctrl/Cmd-Alt-T */
   insertTable() {

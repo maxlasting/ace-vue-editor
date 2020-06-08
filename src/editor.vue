@@ -1,90 +1,48 @@
 <template>
-  <div class="__ace_markdown_editor__">
+  <div class="__ace_markdown_editor__" :class="{ single: singleModel }">
     <div class="editor__header">
+      <div class="editor__logo">
+        <slot name="logo"></slot>
+        <img v-if="!$slots.logo" src="@/assets/logo.png" height="36" @click="clickLogoFn"/>
+      </div>
       <input
         placeholder="输入文章标题..."
         v-model="articleTitle"
         spellcheck="false"
         maxlength="80"
-        class="header__input"
-        :class="{ 'toggle': !togglePreview }"
+        class="title__input"
       >
       <div class="header__fns">
         <slot name="header"></slot>
       </div>
     </div>
 
-    <div class="editor__body" :class="{ 'toggle': !togglePreview }">
-      <div class="editor__body-markdown" :class="{ 'toggle': !togglePreview }">
+    <div class="editor__body">
+      <div class="editor__body-markdown">
         <div class="markdown__editor y66" ref="editor"></div>
       </div>
-      <div class="editor__body-html" v-show="togglePreview">
+      <div class="editor__body-html" v-show="!singleModel">
         <div class="html__content y66__markdown" v-html="html" v-highlight ref="preview"/>
       </div>
+      <div class="scroll-bar" v-show="singleModel" ref="editorScroll"></div>
     </div>
 
-    <div class="editor__footer" :class="{ 'toggle': !togglePreview }">
+    <div class="editor__footer">
       <div class="editor__footer-left">
         <div class="footer__left-fns">
           <div class="tips" @mouseenter="showTipsFn" @mouseleave="hideTipsFn">
             <div class="tips__card" v-show="visibleTips">
               <div class="tips__card-wrapper">
-                <div class="title">常用快捷键</div>
-                <ul class="list">
-                  <li class="list__item">
-                    <span>添加标题</span>
-                    <span>Command + H</span>
-                  </li>
-                  <li class="list__item">
-                    <span>插入图片</span>
-                    <span>Ctrl / Command + I</span>
-                  </li>
-                  <li class="list__item">
-                    <span>插入链接</span>
-                    <span>Ctrl / Command + k</span>
-                  </li>
-                  <li class="list__item">
-                    <span>插入代码</span>
-                    <span>Ctrl / Command + Shift + C</span>
-                  </li>
-                  <li class="list__item">
-                    <span>插入表格</span>
-                    <span>Ctrl / Command + Alt + T</span>
-                  </li>
-                  <li class="list__item">
-                    <span>有序列表</span>
-                    <span>Ctrl / Command + Alt + L</span>
-                  </li>
-                  <li class="list__item">
-                    <span>无序列表</span>
-                    <span>Ctrl / Command + T</span>
-                  </li>
-                  <li class="list__item">
-                    <span>文字加粗</span>
-                    <span>Command + B</span>
-                  </li>
-                  <li class="list__item">
-                    <span>文字倾斜</span>
-                    <span>Shift + Command + I</span>
-                  </li>
-                  <li class="list__item">
-                    <span>文字划线</span>
-                    <span>Shift + Command + S</span>
-                  </li>
-                  <li class="list__item">
-                    <span>段落引用</span>
-                    <span>Command + .</span>
-                  </li>
-                </ul>
+                <Tips></Tips>
               </div>
             </div>
           </div>
           <slot name="footer"></slot>
         </div>
-        <div class="footer__left-toggle" :class="{ 'close-preview': !togglePreview }" @click="clickTotogglePreviewFn"></div>
+        <div class="footer__left-single" @click="clickToToggleSingleModelFn"></div>
       </div>
 
-      <div class="editor__footer-right" v-show="togglePreview">
+      <div class="editor__footer-right" v-show="!singleModel">
         <div class="footer__right-title">预览</div>
         <div class="footer__right-fonts">共 {{ totalLine }} 行 &nbsp; 字数: {{ words }}</div>
       </div>
@@ -101,8 +59,11 @@ import ace from 'brace'
 import 'brace/ext/searchbox'
 import 'brace/mode/markdown'
 import { keybindings, bindingMethods } from '@plugins/keybindings'
+import Tips from '@components/tips'
 
 export default {
+  components: { Tips },
+
   props: {
     value: {
       type: String,
@@ -130,11 +91,11 @@ export default {
       description: '',
       source: '',
       html: '',
+      singleModel: false,
       editor: null,
       editSession: null,
       convertTimer: null,
       isEditorChange: false,
-      togglePreview: true,
       visibleTips: false,
       saveTimer: null,
       isAutoSave: false,
@@ -210,10 +171,9 @@ export default {
       // 设置换行
       editor.session.setUseWrapMode(true)
       // 设置边距
-      editor.renderer.setPadding(30)
+      // editor.renderer.setPadding(30)
       // 设置上下边距
       editor.renderer.setScrollMargin(12, 100)
-      editor.renderer.getVScrollBarAlwaysVisible(true)
 
       editor.setOptions({
         // 高亮当前所在的行
@@ -257,6 +217,11 @@ export default {
       const height = this.editSession.getScreenLength() * lineHeight - clientHeight
       const ratio = parseFloat(scrollTop) / height
       const calScrollTop = (this.$refs.preview.scrollHeight - this.$refs.preview.clientHeight) * ratio
+      if (this.singleModel) {
+        const h = (clientHeight / (this.editSession.getScreenLength() * lineHeight)) * clientHeight
+        this.$refs.editorScroll.style.height = h + 'px'
+        this.$refs.editorScroll.style.transform = `translateY(${Math.max(0, (clientHeight - h) * ratio) + 'px'})`
+      }
       this.$refs.preview.scrollTop = calScrollTop
     },
     _previewSyncScoller () {
@@ -296,16 +261,8 @@ export default {
         })
       }
     },
-    $submit () {
-      const preview = this.$refs.preview
-      const firstp = preview.querySelector('p')
-      const description = firstp ? firstp.innerHTML.replace(/<[^>]+>/g, '') + '...' : ''
-      return  {
-        source: this.source, html: this.html, title: this.articleTitle, description,
-      }
-    },
-    clickTotogglePreviewFn () {
-      this.togglePreview = !this.togglePreview
+    clickToToggleSingleModelFn () {
+      this.singleModel = !this.singleModel
       this.editorResizeFn()
     },
     editorSave (auto = false) {
@@ -323,6 +280,17 @@ export default {
     },
     $insertImage (url) {
       this.insertImage(url)
+    },
+    $submit () {
+      const preview = this.$refs.preview
+      const firstp = preview.querySelector('p')
+      const description = firstp ? firstp.innerHTML.replace(/<[^>]+>/g, '') + '...' : ''
+      return  {
+        source: this.source, html: this.html, title: this.articleTitle, description,
+      }
+    },
+    clickLogoFn () {
+      window.alert('Hi, yang girl!')
     },
     ...bindingMethods,
   },

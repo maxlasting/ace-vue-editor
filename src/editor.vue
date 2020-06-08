@@ -10,9 +10,7 @@
         :class="{ 'toggle': !togglePreview }"
       >
       <div class="header__fns">
-        <slot name="header-before"></slot>
-        <slot name="submit"></slot>
-        <slot name="header-after"></slot>
+        <slot name="header"></slot>
       </div>
     </div>
 

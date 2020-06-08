@@ -61,7 +61,7 @@ const baseConfig = {
         loader: 'url-loader',
         options: {
           // 文件的大小小于10000字节(10kb)的时候会返回一个dataUrl
-          limit: 10000,
+          limit: 100000,
           // 生成的文件的保存路径和后缀名称
           name: '[name].[hash:7].[ext]',
           esModule: false,

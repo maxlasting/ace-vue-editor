@@ -27,6 +27,7 @@ npm i -S ace-vue-editor
     <!-- use lazy loading, the editor has 1.7mb size -->
     <!-- autosave will emit save event in per saveInterval seconds-->
     <component v-if="ready" :is="aceMarkdownEditor" :value="defaultValue" title="" @save="saveFn" ref="editor">
+      <!-- <div slot="logo">Logo</div> -->
       <div class="editor_fns" slot="header">
         <a class="insert" @click="insertImageFn">插入图片</a>
         <div class="submit" @click="submitFn">提交</div>

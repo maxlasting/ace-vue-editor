@@ -20,7 +20,7 @@ const baseConfig = {
       vue: join(__dirname, '..', 'node_modules', 'vue', 'dist', 'vue.runtime.js'),
       '@app': join(__dirname, '..', 'development', 'app.vue'),
       '@': join(__dirname, '..', 'src'),
-      'ace-markdown-editor': join(__dirname, '..', 'src', 'index.js'),
+      'ace-vue-editor': join(__dirname, '..', 'src', 'index.js'),
       '@plugins': join(__dirname, '..', 'src', 'plugins'),
       '@components': join(__dirname, '..', 'src', 'components'),
     },

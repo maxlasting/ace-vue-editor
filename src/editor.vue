@@ -60,6 +60,7 @@ import 'brace/ext/searchbox'
 import 'brace/mode/markdown'
 import { keybindings, bindingMethods } from '@plugins/keybindings'
 import Tips from '@components/tips'
+// import pasteImage from 'paste-image'
 
 export default {
   components: { Tips },
@@ -114,9 +115,10 @@ export default {
   mounted () {
     this.initAceEditorFn()
     this.initEditorSyncScollerFn()
-    this.InitKeybindingsFn()
+    this.initKeybindingsFn()
     this.initPropsDataFn()
     this.autoEmitSaveFn()
+    this.initDropImageEventFn()
   },
 
   watch: {
@@ -247,8 +249,24 @@ export default {
         this.editor.resize(true)
       }, 10)
     },
+    initDropImageEventFn () {
+      const editor = this.$refs.editor
+      editor.addEventListener('dragover', (e) => e.preventDefault())
+      editor.addEventListener('dragleave', (e) => e.preventDefault())
+      editor.addEventListener('drop', (e) => {
+        e.preventDefault()
+        const files = e.dataTransfer.files
+        const images = []
+        for (let i=0; i<files.length; i++) {
+          if (/^image\/.*/.test(files[i].type)) {
+            images.push(files[i])
+          }
+        }
+        this.$emit('droped', images)
+      })
+    },
     /* 绑定快捷键 */
-    InitKeybindingsFn () {
+    initKeybindingsFn () {
       for (const action in keybindings) {
         if (!this[action] || typeof this[action] !== 'function') {
           console.error(action, 'is not found')

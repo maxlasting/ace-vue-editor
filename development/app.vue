@@ -3,7 +3,7 @@
     <!-- <ace-markdown-editor :value="defaultValue" title="Article title..." @submit="submitFn"></ace-markdown-editor> -->
     <!-- use lazy loading, the editor has 1.7mb size -->
     <!-- autosave will emit save event in per saveInterval seconds-->
-    <component v-if="ready" :is="aceMarkdownEditor" :value="defaultValue" title="" @save="saveFn" ref="editor">
+    <component v-if="ready" :is="aceMarkdownEditor" :value="defaultValue" title="" @save="saveFn" @droped="dropedFn" ref="editor">
       <!-- <div slot="logo">Logo</div> -->
       <div class="editor_fns" slot="header">
         <a class="insert" @click="insertImageFn">插入图片</a>
@@ -37,7 +37,7 @@ export default {
   },
   methods: {
     async initEditor () {
-      const aceMarkdownEditor = await import('ace-markdown-editor')
+      const aceMarkdownEditor = await import('ace-vue-editor')
       this.aceMarkdownEditor = aceMarkdownEditor.default
       this.ready = true
     },
@@ -51,6 +51,10 @@ export default {
     insertImageFn () {
       this.$refs.editor.$insertImage('https://')
     },
+    dropedFn (images) {
+      console.log(images)
+      // this.$refs.editor.$insertImage('https://')
+    }
   }
 }
 </script>

@@ -8,6 +8,9 @@ $b: "__ace_markdown_editor__";
   margin: 0 auto;
   position: relative;
   overflow: hidden;
+  * {
+    box-sizing: content-box;
+  }
 }
 
 .#{$b} {
@@ -124,7 +127,8 @@ $b: "__ace_markdown_editor__";
   .editor__body-markdown {
     padding: 0 30px;
     height: 100%;
-    width: calc(50% - 60px);
+    box-sizing: content-box;
+    width: calc(50% - 61px);
     border-right: 1px solid #dddddd;
   }
 
@@ -180,6 +184,7 @@ $b: "__ace_markdown_editor__";
     justify-content: space-between;
     color: #686868;
     font-size: 14px;
+    box-sizing: border-box;
   }
 
   .editor__footer-left .footer__left-fns {

@@ -24,7 +24,7 @@ export const keybindings = {
   'insertTable': createKeyBinding([Command, Alt, 'T']),
   'insertCode': createKeyBinding([Command, Shift,  'C']),
   'insertInlineCode': createKeyBinding([Command, Alt,  'C']),
-  'editorSave': createKeyBinding([Command, 'S'])
+  'editorSave': createKeyBinding([Command, 'S']),
 }
 
 export const bindingMethods = {
@@ -219,7 +219,7 @@ export const bindingMethods = {
     this._moveCursor(row, column + num)
   },
   /* Ctrl/Cmd-Shift-C */
-  insertCode() {
+  insertCode () {
     const code = '\n' +
     '```\n\n' +
     '```'
@@ -253,7 +253,7 @@ export const bindingMethods = {
     this._moveCursor(row, column - 1)
   },
   /* Ctrl/Cmd-Alt-T */
-  insertTable() {
+  insertTable () {
     const table = '\n\n' +
     '| Column 1 | Column 2 | Column 3 |\n' +
     '| -------- | -------- | -------- |\n' +

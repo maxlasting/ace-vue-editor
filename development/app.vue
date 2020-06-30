@@ -3,7 +3,7 @@
     <!-- <ace-markdown-editor :value="defaultValue" title="Article title..." @submit="submitFn"></ace-markdown-editor> -->
     <!-- use lazy loading, the editor has 1.7mb size -->
     <!-- autosave will emit save event in per saveInterval seconds-->
-    <component v-if="ready" :is="aceMarkdownEditor" :value="defaultValue" title="" @save="saveFn" @droped="dropedFn" ref="editor">
+    <component v-if="ready" :is="aceMarkdownEditor" :value="defaultValue" title="666" freezeTitle @save="saveFn" @droped="dropedFn" ref="editor">
       <!-- <div slot="logo">Logo</div> -->
       <div class="editor_fns" slot="header">
         <a class="insert" @click="insertImageFn">插入图片</a>
@@ -70,7 +70,7 @@ body, html {
 .editor {
   height: 100%;
   position: relative;
-  min-width: 1200px;
+  min-width: 1000px;
 }
 
 .editor .loading {

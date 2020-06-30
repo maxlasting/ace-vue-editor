@@ -6,12 +6,16 @@
         <img v-if="!$slots.logo" src="@/assets/logo.png" height="36" @click="clickLogoFn"/>
       </div>
       <input
+        v-if="!freezeTitle"
         placeholder="输入文章标题..."
         v-model="articleTitle"
         spellcheck="false"
         maxlength="80"
         class="title__input"
       >
+      <div v-else class="header__title">
+        <slot name="title"></slot>
+      </div>
       <div class="header__fns">
         <slot name="header"></slot>
       </div>
@@ -73,6 +77,10 @@ export default {
     title: {
       type: String,
       default: '',
+    },
+    freezeTitle: {
+      type: Boolean,
+      default: false,
     },
     saveInterval: {
       type: Number,

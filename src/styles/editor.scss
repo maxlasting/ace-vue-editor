@@ -100,6 +100,12 @@ $b: "__ace_markdown_editor__";
     flex: 1;
   }
 
+  .header__title {
+    margin: 0 28px;
+    height: 100%;
+    flex: 1;
+  }
+
   .header__fns {
     position: relative;
     z-index: 999;

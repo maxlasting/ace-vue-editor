@@ -26,6 +26,7 @@ npm i -S ace-vue-editor
     <!-- <ace-markdown-editor :value="defaultValue" title="Article title..." @submit="submitFn"></ace-markdown-editor> -->
     <!-- use lazy loading, the editor has 1.7mb size -->
     <!-- autosave will emit save event in per saveInterval seconds-->
+    <!-- after v14.0.0 add drag image upload function - @droped, you can get the droped images list-->
     <component v-if="ready" :is="aceMarkdownEditor" :value="defaultValue" title="" @save="saveFn" @droped="dropedFn" ref="editor">
       <!-- <div slot="logo">Logo</div> -->
       <div class="editor_fns" slot="header">

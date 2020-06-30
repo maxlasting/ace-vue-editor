@@ -1,6 +1,6 @@
 {
   "name": "ace-vue-editor",
-  "version": "1.4.0-beat",
+  "version": "1.4.0-beat2",
   "description": "ace vue markdown editor",
   "main": "dist/index.js",
   "scripts": {

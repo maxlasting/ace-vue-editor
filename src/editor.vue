@@ -26,7 +26,7 @@
         <div class="markdown__editor y66" ref="editor"></div>
       </div>
       <div class="editor__body-html" v-show="!singleModel">
-        <div class="html__content y66__markdown" v-html="html" ref="preview"/>
+        <div class="html__content y66__markdown" v-highlight v-html="html" ref="preview"/>
       </div>
       <div class="scroll-bar" v-show="singleModel" ref="editorScroll"></div>
     </div>
@@ -108,12 +108,12 @@ export default {
   },
 
   directives: {
-    // highlight (el) {
-    //   const blocks = el.querySelectorAll('pre code')
-    //   highlightjsLineNumbers(hljs)
-    //   hljs.initLineNumbersOnLoad()
-    //   blocks.forEach(block => hljs.highlightBlock(block))
-    // },
+    highlight (el) {
+      const blocks = el.querySelectorAll('pre code')
+      // highlightjsLineNumbers(hljs)
+      // hljs.initLineNumbersOnLoad()
+      blocks.forEach(block => hljs.highlightBlock(block))
+    },
   },
 
   mounted () {

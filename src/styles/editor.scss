@@ -15,7 +15,6 @@ $b: "__ace_markdown_editor__";
 
 .#{$b} {
   &.single .editor__header {
-    display: block;
     .editor__logo {
       cursor: pointer;
       transition: opacity 0.5s;
